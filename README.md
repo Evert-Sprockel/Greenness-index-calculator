@@ -11,7 +11,7 @@ This script does not edit the pictures it uses in any way. In other words, it is
 If you have never used Python before, you need to install it first (see the [Python website](https://www.python.org/downloads/)). It is also recommended to install a Python editor such as PyCharm (go for the [community edition](https://www.jetbrains.com/pycharm/download/other.html)), but this is not required, as Python comes with a basic editor called IDLE.
 
 ### 3. The files in the project folder
-After making sure Python is installed; download the project folder from GitHub (click on `code` > `download ZIP`). Unzip it, and put it in a file location where you can find it back. The project contains the script itself, a folder with example images and an output file. The indices from the example images are already calculated: please see if you understand how these values.
+After making sure Python is installed; download the project folder from GitHub (click on `code` > `download ZIP`). Unzip it, and put it in a file location where you can find it back. The project contains the script itself, a folder with example images and an output file. The indices from the example images are already calculated: please see if you understand these values.
 
 ### 4. Running the script
 Next, navigate to the folder `img` and replace the files inside with the images you wish to analyze. Open the project via PyCharm or any other editor, run the code, and the values will be written to the Excel file.
@@ -23,4 +23,4 @@ If you don't restructure/rename anything the project folder, it is not necessary
 The first two variables declared at the script define where the images can be found, where the output file will be created and what name it will have. If you want Python to find the images elsewhere on your computer, or want to save the output somewhere else, you can change these variables. However, I recommend just moving the files.
 
 ### Calculating the blueness or redness index instead
-By changing the integer that is stored in the variable indexColor, you change the index that is calculated. As mentioned in the script, the indices 0, 1 and 2 stand for the red, green and blue channel respectively. Changing the 1 by a 0 or a 2 will cause the script to calculate the red or blue index.
+By changing the integer that is stored in the variable `indexColor`, you change the index that is calculated. As mentioned in the script, the indices `0`, `1` and `2` stand for the red, green and blue channel respectively. Changing the `1` by a `0` or a `2` will cause the script to calculate the red or blue index.
