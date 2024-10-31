@@ -85,7 +85,15 @@ def calculateChannelMean(channel):
 # Creates an empty dataframe
 # Returns the empty dataframe
 def createDataframe():
-    headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage', 'GreennessIndex(G/R+G+B)']
+    if indexColor == 0:
+        headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage',
+                   'RednessIndex(R/R+G+B)']
+    elif indexColor == 1:
+        headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage',
+                   'GreennessIndex(G/R+G+B)']
+    else:
+        headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage',
+                   'BluenessIndex(B/R+G+B)']
     return pd.DataFrame(columns=headers)
 
 
