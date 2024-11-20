@@ -1,7 +1,11 @@
 # Greenness index calculator
 A Python script that takes a folder of images and calculates a greenness index for each image by dividing the sum of all green pixel values by the sum of all green, red and blue pixel values. The output will be saved in an Excel file.
 
-$$\frac{\sum_{i=1}^n \text{green pixels}}{\sum_{i=1}^n \text{green pixels} + \sum_{i=1}^n \text{red pixels} + \sum_{i=1}^n \text{blue pixels}}$$
+$$\text{Greennes index} = \frac{\sum_{i=1}^n \text{green pixels}}{\sum_{i=1}^n \text{green pixels} + \sum_{i=1}^n \text{red pixels} + \sum_{i=1}^n \text{blue pixels}}$$
+
+Update: the script now also calculates the contrast of each image by computing the standard deviation of pixel values in the red, green, and blue channels, and then averaging these values:
+
+$$\text{Contrast} = \frac{\sigma_\text{red pixels} + \sigma_\text{green pixels} + \sigma_\text{blue pixels}}{3}$$
 
 ## How to use this script
 ### 1. Precondition: color-correcting and cropping images
