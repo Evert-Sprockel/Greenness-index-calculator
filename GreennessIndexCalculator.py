@@ -53,25 +53,28 @@ def isRGB(imagePath):
         return image.mode == 'RGB' or image.mode == 'RGBA'
 
 
-# Takes one image path and calculates the greenness index
-# Returns a list with four floats: one for each channel and one for the average
-def calculateChromaticAverages(image_path):
-    channelMeans = extractChannelMeansFromImage(image_path)
-    channelMeans.append(channelMeans[indexColor] / (channelMeans[0] + channelMeans[1] + channelMeans[2]))
-    return channelMeans
+# Takes one image path and calculates the greenness index and contrast
+# Returns a list with eight floats: 3x channel mean, 3x channel std. dev., 1x greenness index, 1x total contrast
+def calculateIndexAndContrast(image_path):
+    channelMaC = extractChannelMeansAndContrastFromImage(image_path)
+    channelMaC.insert(3, channelMaC[indexColor] / (channelMaC[0] + channelMaC[1] + channelMaC[2]))
+    channelMaC.append(np.mean([channelMaC[4], channelMaC[5], channelMaC[6]]))
+    return channelMaC
 
 
 # Takes one image path and calculates the average of each channel
-# Returns a list with three floats: one for each channel
-def extractChannelMeansFromImage(imagePath):
+# Returns a list with six floats: two for each channel
+def extractChannelMeansAndContrastFromImage(imagePath):
     with Image.open(imagePath) as image:
         print(f'Started calculating {imagePath}')
         imgArray = np.array(image)
         channelMeans = []
+        channelContrast = []
         for channelIndex in range(3):
             channel = imgArray[:, :, channelIndex]
             channelMeans.append(calculateChannelMean(channel))
-        return channelMeans
+            channelContrast.append(np.std(channel))
+        return channelMeans + channelContrast
 
 
 # Calculates the mean of all the pixel values of a given channel
@@ -82,18 +85,29 @@ def calculateChannelMean(channel):
     return np.mean(channel)
 
 
+# Calculates the standard deviations of all the pixel values of a given channel: a measure of contrast
+# Returns one float representing the channel standard deviation/contrast
+def calculateChannelContrast(channel):
+    if not isinstance(channel, np.ndarray):
+        raise TypeError(f"Not a numpy array")
+    return np.std(channel)
+
+
 # Creates an empty dataframe
 # Returns the empty dataframe
 def createDataframe():
     if indexColor == 0:
         headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage',
-                   'RednessIndex(R/R+G+B)']
+                   'RednessIndex(R/(R+G+B))', 'RedChannelStd.dev.', 'GreenChannelStd.dev.', 'BlueChannelStd.dev.',
+                   'Contrast((Rstdev+Gstdev+Bstdev)/3)']
     elif indexColor == 1:
         headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage',
-                   'GreennessIndex(G/R+G+B)']
+                   'GreennessIndex(G/(R+G+B))', 'RedChannelStd.dev.', 'GreenChannelStd.dev.', 'BlueChannelStd.dev.',
+                   'Contrast((Rstdev+Gstdev+Bstdev)/3)']
     else:
         headers = ['Filename', 'RedChannelAverage', 'GreenChannelAverage', 'BlueChannelAverage',
-                   'BluenessIndex(B/R+G+B)']
+                   'BluenessIndex(B/(R+G+B))', 'RedChannelStd.dev.', 'GreenChannelStd.dev.', 'BlueChannelStd.dev.',
+                   'Contrast((Rstdev+Gstdev+Bstdev)/3)']
     return pd.DataFrame(columns=headers)
 
 
@@ -111,6 +125,6 @@ print("\nStart of calculation")
 listOfImages = getImageList(imagesDirectory)
 df = createDataframe()
 for path in listOfImages:
-    newRow = [path] + calculateChromaticAverages(path)
+    newRow = [path] + calculateIndexAndContrast(path)
     df.loc[len(df)] = newRow
 openAndWriteToExcel(df, outputFileName)
