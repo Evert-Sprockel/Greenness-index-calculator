@@ -3,7 +3,7 @@ A Python script that takes a folder of images and calculates a greenness index f
 
 $$\text{Greennes index} = \frac{\sum_{i=1}^n \text{green pixels}}{\sum_{i=1}^n \text{green pixels} + \sum_{i=1}^n \text{red pixels} + \sum_{i=1}^n \text{blue pixels}}$$
 
-Update: the script now also calculates the contrast of each image by computing the standard deviation of pixel values in the red, green, and blue channels, and then averaging these values:
+_Update:_ the script now also calculates the contrast of each image by computing the standard deviation of pixel values in the red, green, and blue channels, and then averaging these values:
 
 $$\text{Contrast} = \frac{\sigma_\text{red pixels} + \sigma_\text{green pixels} + \sigma_\text{blue pixels}}{3}$$
 
@@ -28,3 +28,6 @@ The first two variables declared at the script define where the images can be fo
 
 ### Calculating the blueness or redness index instead
 By changing the integer that is stored in the variable `indexColor`, you change the index that is calculated. As mentioned in the script, the indices `0`, `1` and `2` stand for the red, green and blue channel respectively. Changing the `1` by a `0` or a `2` will cause the script to calculate the red or blue index.
+
+## _Update:_ why calculate the contrast?
+I thought that direct sunlight might affect the greenness ratio, due to blown out highlights and very dark shadows. Contrast seems like an objective way to evaluate this. However, it doesn't seem like it really has an effect on the greenness index, as shown by the plot included in the project folder.
