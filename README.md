@@ -1,11 +1,10 @@
 # Greenness index calculator
-A Python script that takes a folder of images and calculates a greenness index for each image by dividing the sum of all green pixel values by the sum of all green, red and blue pixel values. The output will be saved in an Excel file.
+A Python script that takes a folder of images and calculates a greenness index for each image by dividing the sum of all green pixel values by the sum of all green, red and blue pixel values. The output will be saved in an Excel file. _Update:_ the script now also calculates the contrast of each image by computing the standard deviation of pixel values in the red, green, and blue channels, and then averaging these values.
 
-$$\text{Greennes index} = \frac{\sum_{i=1}^n \text{green pixels}}{\sum_{i=1}^n \text{green pixels} + \sum_{i=1}^n \text{red pixels} + \sum_{i=1}^n \text{blue pixels}}$$
+$$\text{Greenness Index} = \frac{\sum_{i=1}^n g_i}{\sum_{i=1}^n (r_i + g_i + b_i)}$$
+$$\text{Contrast} = \frac{\sigma_r + \sigma_g + \sigma_b}{3} $$
 
-_Update:_ the script now also calculates the contrast of each image by computing the standard deviation of pixel values in the red, green, and blue channels, and then averaging these values:
-
-$$\text{Contrast} = \frac{\sigma_\text{red pixels} + \sigma_\text{green pixels} + \sigma_\text{blue pixels}}{3}$$
+In these equations, $r_i$ stand for the intensity of the red channel for the $i$-th pixel (ranging from 0-255), and $\sigma_r$ refers to the standard deviation of intensity values across all red pixels; similarly, $g_i$, $b_i$, $\sigma_g$, $\sigma_b$ represent the corresponding values for the green and blue channels, respectively.
 
 ## How to use this script
 ### 1. Precondition: color-correcting and cropping images
