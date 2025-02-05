@@ -10,13 +10,16 @@ In these equations, $r_i$ stand for the intensity of the red channel for the $i$
 ### 1. Precondition: color-correcting and cropping images
 This script does not edit the pictures it uses in any way. In other words, it is the user's responsibility to make sure the images are ready to be analyzed. Adobe Lightroom can be used to crop and color-correct photographs. The latter is less important for pictures taken in laboratory setting with contant lighting conditions and camera settings.
 
-### 2. Installing Python
+### 2. Installing Python (and editor)
 If you have never used Python before, you need to install it first (see the [Python website](https://www.python.org/downloads/)). It is also recommended to install a Python editor such as PyCharm (go for the [community edition](https://www.jetbrains.com/pycharm/download/other.html)), but this is not required, as Python comes with a basic editor called IDLE.
 
-### 3. The files in the project folder
+### 3. Installing packages
+The script relies on three modules that you need to install separately from Python itself. This can be done easily using pip, which is a package manager that is automatically included in Python. In the editor of your choice, open the console and run the following code: ```pip install pandas pillow numpy```.
+
+### 4. The files in the project folder
 After making sure Python is installed; download the project folder from GitHub (click on `code` > `download ZIP`). Unzip it, and put it in a file location where you can find it back. The project contains the script itself, a folder with example images and an output file. The indices from the example images are already calculated: please see if you understand these values.
 
-### 4. Running the script
+### 5. Running the script
 Next, navigate to the folder `img` and replace the files inside with the images you wish to analyze. Open the project via PyCharm or any other editor, run the code, and the values will be written to the Excel file.
 
 ## Editing the script
